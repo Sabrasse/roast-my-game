@@ -1,0 +1,9 @@
+<h1>Let's start</h1>
+<p>Upload a game screenshot</p>
+
+<%= simple_form_for @content do |f| %>
+  <%= f.input :media, label: "Upload Media", as: :file %>
+  <%= f.input :description, label: "Description", as: :text, placeholder: "Describe your game" %>
+
+  <%= custom_form_button("Publish my screenshot", color: "primary") %>
+<% end %>
