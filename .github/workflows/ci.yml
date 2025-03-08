@@ -1,0 +1,41 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: roast_my_game_test
+        ports:
+          - "5432:5432"
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://postgres:password@localhost:5432/roast_my_game_test"
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+          bundler-cache: true
+
+      - name: Install Dependencies
+        run: bundle install
+
+      - name: Setup Database
+        run: |
+          bundle exec rails db:create db:migrate
+
+      - name: Run Tests
+        run: bundle exec rspec
