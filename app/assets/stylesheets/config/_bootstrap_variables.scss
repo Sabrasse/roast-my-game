@@ -4,19 +4,22 @@
 // 2. These variables are defined with default value (see https://robots.thoughtbot.com/sass-default)
 // 3. You can override them below!
 
-// General style
-$font-family-sans-serif: $body-font;
-$headings-font-family:   $headers-font;
-$body-bg:                $light-gray;
-$font-size-base:         1rem;
+// Custom Colors from Coolors
+$primary:    #122C34; // Dark Blue
+$secondary:  #CC2936; // Red
+$success:    #17BEBB; // Teal
+$warning:    #E3B505; // Yellow
+$info:       #17BEBB; // Matching highlight color
+$danger:     #CC2936; // Keeping it red for consistency
+$light:      #ffffff;
+$dark:       #122C34;
 
-// Colors
-$body-color: $gray;
-$primary:    $blue;
-$success:    $green;
-$info:       $yellow;
-$danger:     $red;
-$warning:    $orange;
+// General style
+$font-family-sans-serif: "Inter", sans-serif;
+$headings-font-family:   "Inter", sans-serif;
+$body-bg:                $primary;
+$body-color:             $light;
+$font-size-base:         1rem;
 
 // Buttons & inputs' radius
 $border-radius-sm:            .0625rem;

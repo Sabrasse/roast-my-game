@@ -1,0 +1,16 @@
+<% title ||= "Default Title" %>
+<% tagline ||= "Default tagline goes here." %>
+<% button_text ||= nil %>  <%# Button is optional, so default to nil %>
+<% button_path ||= nil %>
+<% button_color ||= "primary" %>
+
+<header class="banner">
+  <div class="banner-content">
+    <h1><%= title %></h1>
+    <p class="tagline"><%= tagline %></p>
+
+    <% if button_text.present? && button_path.present? %>
+      <%= custom_button(button_text, button_path, color: button_color) %>
+    <% end %>
+  </div>
+</header>

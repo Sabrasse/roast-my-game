@@ -6,4 +6,11 @@ module ApplicationHelper
   def custom_form_button(label, color: "primary", size: "md")
     content_tag :button, label, class: "custom-btn btn-#{color} btn-#{size}", type: "submit", data: { turbo: "false" }
   end
+
+  def video_poster_url(content)
+    return url_for(content.thumbnail) if content.thumbnail.attached?
+
+    # Dynamically extract the first frame of the video
+    "#{url_for(content.media)}#t=1"
+  end
 end
