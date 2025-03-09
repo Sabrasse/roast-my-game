@@ -1,21 +1,17 @@
-<h1>Welcome to Roast My Game !</h1>
-<p>The best place to gather honest feedback about your game.</p>
-<%= custom_button("Start", new_content_path, color: "success") %>
+<% provide(:title, "Welcome to Roast My Game - Get Feedback on Your Game") %>
+<% provide(:meta_description, "The best platform for developers to upload their games, receive honest reviews, and improve their projects.") %>
 
-<h1>Last roasted games</h1>
+<%= render "shared/banner",
+  title: "Welcome to Roast My Game!",
+  tagline: "The best place to gather honest feedback about your game.",
+  button_text: "Upload",
+  button_path: new_content_path,
+  button_color: "success" %>
 
-<% Content.all.each do |content| %>
-  <% if content.media.attached? %>
-    <% if content.media.blob.content_type.start_with?("image") %>
-      <%= image_tag content.media, size: "200x200", class: "rounded" %>
-    <% elsif content.media.blob.content_type.start_with?("video") %>
-      <video width="320" height="240" controls>
-        <source src="<%= url_for(content.media) %>" type="<%= content.media.blob.content_type %>">
-        Your browser does not support the video tag.
-      </video>
-    <% else %>
-      <p>Unsupported media type.</p>
+<div class="container">
+  <div class="content-grid">
+    <% Content.all.each do |content| %>
+      <%= render "contents/content_card", content: content %>
     <% end %>
-  <% end %>
-  <p><%= content.description %></p>
-<% end %>
+  </div>
+</div>
