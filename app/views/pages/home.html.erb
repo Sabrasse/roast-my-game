@@ -1,17 +1,17 @@
 <% provide(:title, "Welcome to Roast My Game - Get Feedback on Your Game") %>
 <% provide(:meta_description, "The best platform for developers to upload their games, receive honest reviews, and improve their projects.") %>
 
-<%= render "shared/banner",
-  title: "Welcome to Roast My Game!",
-  tagline: "The best place to gather honest feedback about your game.",
-  button_text: "Upload",
-  button_path: new_content_path,
-  button_color: "success" %>
-
 <div class="container">
-  <div class="content-grid">
+  <%= render "shared/banner",
+  title: "Get honest feedback, improve your games",
+  tagline: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  button_text: "Start",
+  button_path: new_content_path,
+  button_color: "danger" %>
+
+  <%# <div class="content-grid">
     <% Content.all.each do |content| %>
-      <%= render "contents/content_card", content: content %>
-    <% end %>
-  </div>
+      <%# <%= render "contents/content_card", content: content %>
+    <%# <% end %>
+  <%# </div> %>
 </div>

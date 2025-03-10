@@ -1,59 +1,63 @@
 .banner {
-  /* Try a subtle gradient or solid color that matches your brand.
-     Example: primary (Dark Blue) -> success (Teal) */
-  background: linear-gradient(135deg, $primary 20%, $danger 100%);
-
-  /* Create spacious padding for a premium feel */
-  padding: 100px 20px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 40px;
-
-  /* Subtle shadow or box-shadow for depth (optional) */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-
-  /* Let’s make sure the text is visible if the background is dark. */
-  color: $light;
-
-  .banner-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  display: grid;
+  margin: 100px auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
 
   h1 {
-    font-size: 48px; /* Larger, bolder title */
-    font-weight: 700;
-    margin-bottom: 15px;
-    line-height: 1.2;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15); /* Subtle glow */
+    color: $danger;
   }
+}
 
-  .tagline {
-    font-size: 22px; /* Larger than default for emphasis */
-    margin-bottom: 30px;
-    opacity: 0.95;
-    max-width: 600px;
-    margin: 0 auto 30px; /* Center the tagline text block */
-  }
+.banner-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Spacing between elements */
+}
 
-  /* For the CTA button */
-  .custom-btn {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 14px 28px;
-    border: none;
-    border-radius: 6px;
-    transition: transform 0.2s ease-in-out;
+.banner-title {
+  font-weight: bold;
+  width: 70%;
+}
 
-    /* If your background is dark, a lighter button stands out.
-       Let’s use $warning (yellow) or $secondary (red) if you prefer. */
-    background: $warning;
-    color: $dark; /* Contrasting text color */
+.banner-stats {
+  display: flex;
+  gap: 40px; /* Space between stat blocks */
+  margin: 10px 0;
 
-    &:hover {
-      transform: scale(1.05);
-      background: darken($warning, 5%);
+  .stat {
+    display: flex;
+    flex-direction: column;
+
+    .stat-value {
+      font-size: 2rem;      // This makes the stat number prominent
+      line-height: 1.2;
+      font-weight: bold;
+      color: $success; /* e.g., teal or any accent color */
     }
+
+    .stat-label {
+      color: $dark; /* or $secondary, depends on your palette */
+      text-transform: uppercase;
+      // letter-spacing: 0.05em;
+      // opacity: 0.8;
+    }
+  }
+}
+
+.banner-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary;
+
+  .placeholder-image {
+    width: 300px;
+    height: 200px;
+    background-color: $primary; /* Placeholder color */
+    border-radius: 8px;
+    /* Or <%= image_tag "hero_image.png" %> with your real image */
   }
 }
