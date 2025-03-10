@@ -5,12 +5,33 @@
 <% button_color ||= "primary" %>
 
 <header class="banner">
-  <div class="banner-content">
-    <h1><%= title %></h1>
-    <p class="tagline"><%= tagline %></p>
+  <div class="banner-left">
+    <h1 class="banner-title"><%= title %></h1>
 
-    <% if button_text.present? && button_path.present? %>
-      <%= custom_button(button_text, button_path, color: button_color) %>
-    <% end %>
+    <h2 class="banner-tagline">
+      <%= simple_format(tagline, {}, wrapper_tag: "span") %>
+    </h2>
+
+    <!-- Stats row -->
+    <div class="banner-stats">
+      <div class="stat">
+        <span class="stat-value">450+</span>
+        <span class="stat-label">honest feedbacks</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">200+</span>
+        <span class="stat-label">games improved</span>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <%= custom_button(button_text, button_path, color: button_color) %>
+  </div>
+
+  <div class="banner-right">
+    <%# <!-- Replace this placeholder with your actual image or illustration -->
+    <div class="placeholder-image">
+      <!-- e.g., <%= image_tag "hero_image.png" %>
+    <%# </div> %>
   </div>
 </header>
