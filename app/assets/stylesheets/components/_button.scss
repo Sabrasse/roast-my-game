@@ -2,10 +2,10 @@
   @extend .btn;  // Inherit Bootstrap button styles
   @extend .btn-primary; // Default to Bootstrap's primary color
 
-  border-radius: 10px;
+  border-radius: 30px;
   font-weight: bold;
   padding: 12px 20px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   color: $light;
-  max-width: 220px; /* Caps the width */
+  max-width: 200px; /* Caps the width */
 }

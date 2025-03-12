@@ -1,11 +1,12 @@
 .banner {
   display: grid;
-  margin: 100px auto;
+  padding: 100px 150px 100px 150px;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+  background: $primary;
 
-  h1 {
-    color: $danger;
+  h1, h2{
+    color: $light;
   }
 }
 
@@ -34,11 +35,11 @@
       font-size: 2rem;      // This makes the stat number prominent
       line-height: 1.2;
       font-weight: bold;
-      color: $success; /* e.g., teal or any accent color */
+      color: $warning; /* e.g., teal or any accent color */
     }
 
     .stat-label {
-      color: $dark; /* or $secondary, depends on your palette */
+      color: $light; /* or $secondary, depends on your palette */
       text-transform: uppercase;
       // letter-spacing: 0.05em;
       // opacity: 0.8;
