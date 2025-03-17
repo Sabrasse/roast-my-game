@@ -2,8 +2,8 @@
   <div class="upload-game my-5">
     <div class="content-form">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <%= link_to "← Back to Games", root_path, class: "text-decoration-none" %>
-        <h1 class="h3 mb-0">Upload Your Game</h1>
+        <%= link_to "← Back to Game", content_path(@content), class: "text-decoration-none" %>
+        <h1 class="h3 mb-0">Edit Your Game</h1>
       </div>
 
       <%= simple_form_for @content, html: { class: "needs-validation" } do |f| %>
@@ -36,13 +36,13 @@
 
         <div class="d-grid gap-2">
           <%= f.button :submit, 
-            "Publish my game", 
+            "Update my game", 
             class: "custom-btn btn-warning",
             data: { 
-              disable_with: '<i class="fas fa-spinner fa-spin"></i> Publishing...'
+              disable_with: '<i class="fas fa-spinner fa-spin"></i> Updating...'
             } %>
         </div>
       <% end %>
     </div>
   </div>
-</div>
+</div> 

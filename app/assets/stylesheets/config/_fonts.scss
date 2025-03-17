@@ -5,6 +5,83 @@
 $body-font: "Work Sans", "Helvetica", "sans-serif";
 $headers-font: "Nunito", "Helvetica", "sans-serif";
 
+// Typography System
+$font-sizes: (
+  'xs': 0.875rem,    // 14px
+  'sm': 0.9rem,      // 14.4px
+  'base': 1rem,      // 16px
+  'lg': 1.125rem,    // 18px
+  'xl': 1.25rem,     // 20px
+  '2xl': 1.5rem,     // 24px
+  '3xl': 2.5rem      // 40px
+);
+
+@function font-size($size) {
+  @return map-get($font-sizes, $size);
+}
+
+// Common text styles
+.text-xs {
+  font-size: font-size('xs');
+}
+
+.text-sm {
+  font-size: font-size('sm');
+}
+
+.text-base {
+  font-size: font-size('base');
+}
+
+.text-lg {
+  font-size: font-size('lg');
+}
+
+.text-xl {
+  font-size: font-size('xl');
+}
+
+.text-2xl {
+  font-size: font-size('2xl');
+}
+
+.text-3xl {
+  font-size: font-size('3xl');
+}
+
+// Responsive text styles
+@media (max-width: 768px) {
+  .text-3xl {
+    font-size: font-size('2xl');
+  }
+  
+  .text-2xl {
+    font-size: font-size('xl');
+  }
+  
+  .text-xl {
+    font-size: font-size('lg');
+  }
+  
+  .text-lg {
+    font-size: font-size('base');
+  }
+}
+
+// Base typography
+body {
+  font-family: $body-font;
+  font-size: font-size('base');
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $headers-font;
+}
+
+h2 {
+  font-size: font-size('2xl') !important;
+}
+
 // To use a font file (.woff) uncomment following lines
 // @font-face {
 //   font-family: "Font Name";
@@ -15,6 +92,3 @@ $headers-font: "Nunito", "Helvetica", "sans-serif";
 // }
 // $my-font: "Font Name";
 
-h2 {
-  font-size: 1.5rem !important;
-}

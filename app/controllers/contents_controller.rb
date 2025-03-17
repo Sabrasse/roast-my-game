@@ -19,20 +19,14 @@ class ContentsController < ApplicationController
 
   def create
     @content = Content.new(content_params)
-    
-    # Set user if logged in, otherwise set session token
-    if user_signed_in?
-      @content.user = current_user
-    else
-      @content.session_token = generate_session_token
-    end
+    @content.user = current_user if user_signed_in?
 
     if @content.save
-      flash[:notice] = user_signed_in? ? 
-        "Your content was successfully uploaded!" : 
-        "Content uploaded! Create an account to keep it permanently."
-      redirect_to @content
+      flash[:notice] = "Your content was successfully uploaded!"
+      redirect_to root_path
     else
+      Rails.logger.error "Content validation errors: #{@content.errors.full_messages.join(', ')}"
+      flash.now[:alert] = "Please fix the errors below: #{@content.errors.full_messages.join(', ')}"
       render :new, status: :unprocessable_entity
     end
   end
@@ -73,15 +67,6 @@ class ContentsController < ApplicationController
 
   def content_params
     params.require(:content).permit(:media, :description)
-  end
-
-  def generate_session_token
-    token = SecureRandom.hex(20)
-    cookies[:content_session_token] = {
-      value: token,
-      expires: 7.days.from_now
-    }
-    token
   end
 
   def ensure_owner
