@@ -1,0 +1,16 @@
+<%= form_with(url: '#', class: "newsletter-form") do |f| %>
+  <div class="input-group mb-3">
+    <%= f.email_field :email, 
+      class: "form-control",
+      placeholder: "Enter your email",
+      required: true,
+      "aria-label": "Email address",
+      "aria-describedby": "newsletter-submit" %>
+    <%= f.submit "Subscribe", 
+      class: "btn btn-primary",
+      id: "newsletter-submit" %>
+  </div>
+  <small class="form-text text-muted">
+    We respect your privacy. Unsubscribe at any time.
+  </small>
+<% end %> 

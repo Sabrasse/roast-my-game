@@ -1,10 +1,35 @@
 class Content < ApplicationRecord
+  # Make user association optional
+  belongs_to :user, optional: true
   has_one_attached :media
   has_one_attached :thumbnail
 
+  # Add session token for anonymous uploads
+  attribute :session_token, :string
+
+  # This tells Rails to automatically update cache keys when the record changes
+  # It's needed for the cache(["v1", content]) to work properly
+  include ActionView::RecordIdentifier
+
+  # This will update the cache when the user associated with the content changes
+  belongs_to :user, touch: true
+
+  # This will update the cache when the media attachment changes
+  has_one_attached :media do |attachable|
+    attachable.variant :thumb, resize_to_limit: [300, 300]
+  end
+
+  # Validations
   validates :media, presence: true
   validate :acceptable_media
   validates :description, presence: true, length: { minimum: 10, maximum: 100, message: "must be between 10 and 100 characters" }
+  validates :session_token, presence: true, if: -> { user_id.blank? }
+
+  # Scopes
+  scope :anonymous, -> { where(user_id: nil) }
+  scope :registered, -> { where.not(user_id: nil) }
+  scope :recent, -> { order(created_at: :desc) }
+  scope :expiring_soon, -> { anonymous.where('created_at < ?', 7.days.ago) }
 
   private
 
@@ -20,6 +45,15 @@ class Content < ApplicationRecord
     # Validate file size (Max 50MB)
     if media.byte_size > 50.megabytes
       errors.add(:media, "must be less than 50MB")
+    end
+  end
+
+  # Only generate cache keys for registered users' content
+  def cache_key_with_version
+    if user_id.present?
+      "#{super}-#{user.cache_key_with_version}"
+    else
+      super
     end
   end
 end

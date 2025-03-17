@@ -1,12 +1,38 @@
-.banner {
-  display: grid;
-  padding: 100px 150px 100px 150px;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+.banner-wrapper {
   background: $primary;
 
-  h1, h2{
+  @media (max-width: 992px) {
+    min-height: 100vh; // Only apply on mobile if needed
+  }
+}
+
+.banner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 100px 15px;
+
+  h1, h2 {
     color: $light;
+    text-align: left;
+  }
+
+  .banner-image {
+    width: 100%;
+  }
+
+  @media (max-width: 992px) { // Mobile behavior
+    grid-template-columns: 1fr;
+
+    .banner-text {
+      order: 1; // Keep text first
+      text-align: left;
+    }
+
+    .banner-image {
+      order: 2; // Moves image below text
+      margin-top: 20px;
+    }
   }
 }
 
