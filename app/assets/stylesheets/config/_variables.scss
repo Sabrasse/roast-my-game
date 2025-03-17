@@ -1,0 +1,57 @@
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Spacing
+$spacing: (
+  'xs': 0.5rem,
+  'sm': 1rem,
+  'md': 1.5rem,
+  'lg': 2rem,
+  'xl': 4rem,
+  '2xl': 6rem
+);
+
+@function spacing($size) {
+  @return map-get($spacing, $size);
+}
+
+// Common transitions
+$transition-base: all 0.3s ease;
+$transition-slow: all 0.5s ease;
+
+// Common shadows
+$shadow-sm: 0 1px 3px rgba($primary, 0.05);
+$shadow-md: 0 4px 6px rgba($primary, 0.1);
+$shadow-lg: 0 4px 20px rgba($primary, 0.08);
+$shadow-hover: 0 8px 24px rgba($primary, 0.1);
+
+// Common gradients
+$gradient-primary: linear-gradient(to bottom, rgba($primary, 0.02), rgba($primary, 0.05));
+$gradient-success: linear-gradient(to right, rgba($success, 0.05), rgba($success, 0.1));
+$gradient-overlay: linear-gradient(to top, rgba($primary, 0.9), rgba($primary, 0.7));
+
+// Common mixins
+@mixin hover-transform {
+  transition: $transition-base;
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@mixin card-hover {
+  transition: $transition-base;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-hover;
+    border-color: rgba($success, 0.2);
+  }
+}
+
+@mixin responsive($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+} 

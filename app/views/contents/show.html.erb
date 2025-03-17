@@ -1,0 +1,99 @@
+<%# SEO Optimization %>
+<% provide(:title, "Game Review - #{@content.description.truncate(50)}") %>
+<% provide(:meta_description, @content.description) %>
+
+<div class="container">
+  <div class="content-details my-5">
+    <%# Back button %>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <%= link_to "← Back to Games", root_path, class: "text-decoration-none" %>
+      <% if user_signed_in? && @content.user == current_user %>
+        <div class="d-flex gap-2">
+          <%= link_to "Edit", edit_content_path(@content), class: "custom-btn btn-warning btn-sm" %>
+          <%= button_to "Delete", content_path(@content), 
+              method: :delete, 
+              class: "custom-btn btn-danger btn-sm",
+              data: { confirm: "Are you sure you want to delete this game?" } %>
+        </div>
+      <% end %>
+    </div>
+
+    <%# Media display %>
+    <div class="content-media-container mb-4">
+      <% if @content.media.attached? %>
+        <% if @content.media.blob.content_type.start_with?("image") %>
+          <%= image_tag @content.media, class: "content-media-large", alt: @content.description %>
+        <% elsif @content.media.blob.content_type.start_with?("video") %>
+          <video class="content-media-large" controls>
+            <source src="<%= url_for(@content.media) %>" type="<%= @content.media.blob.content_type %>">
+            Your browser does not support the video tag.
+          </video>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%# Description %>
+    <div class="content-description mb-4">
+      <h1 class="h3 mb-3">Game Description</h1>
+      <p class="lead"><%= @content.description %></p>
+    </div>
+
+    <%# Comments section %>
+    <div class="comments-section">
+      <h2 class="h4 mb-4">Comments</h2>
+
+      <%# Comment form %>
+      <% if user_signed_in? %>
+        <div class="comment-form mb-4">
+          <%= form_with(model: [@content, Comment.new], local: true) do |f| %>
+            <div class="form-group">
+              <%= f.text_area :body, 
+                class: "form-control", 
+                rows: 3, 
+                placeholder: "Share your thoughts about this game...",
+                required: true %>
+            </div>
+            <div class="mt-2">
+              <%= f.submit "Post Comment", class: "custom-btn btn-warning" %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-info">
+          Please <%= link_to "sign in", new_user_session_path %> to leave a comment.
+        </div>
+      <% end %>
+
+      <%# Comments list %>
+      <div class="comments-list">
+        <% if @content.comments.any? %>
+          <% @content.comments.includes(:user).order(created_at: :desc).each do |comment| %>
+            <div class="comment-card mb-3">
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="comment-header">
+                  <strong><%= comment.user.email %></strong>
+                  <small class="text-muted ms-2">
+                    <%= time_ago_in_words(comment.created_at) %> ago
+                  </small>
+                </div>
+                <% if comment.user == current_user %>
+                  <%= button_to content_comment_path(@content, comment), 
+                      method: :delete, 
+                      class: "btn btn-link text-danger p-0",
+                      data: { confirm: "Delete this comment?" } do %>
+                    <i class="fas fa-trash"></i>
+                  <% end %>
+                <% end %>
+              </div>
+              <div class="comment-body mt-2">
+                <%= comment.body %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">No comments yet. Be the first to share your thoughts!</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div> 

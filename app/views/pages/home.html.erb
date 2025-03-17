@@ -21,7 +21,6 @@
       <%# This section is cached because testimonials don't change frequently %>
       <%= render "shared/testimony" %>
     <% end %>
-  </div>
 
   <%# Value Proposition Section - Cached because it's static %>
   <div class="value-proposition my-5">
@@ -33,7 +32,12 @@
 
   <%# Latest Games Section - Uses Russian Doll Caching %>
   <div class="latest-games my-5">
-    <h2 class="section-title text-center mb-4">Latest Games Being Reviewed</h2>
+    <div class="section-header">
+      <span class="section-label">Latest Games</span>
+      <h2 class="section-title">Games Being Reviewed</h2>
+      <p class="section-subtitle">Discover what other developers are working on and join the conversation</p>
+    </div>
+
     <div class="content-grid">
       <%# Each game card is cached individually %>
       <% @latest_games.each do |content| %>
@@ -46,19 +50,24 @@
     
     <%# Call to Action - Not cached because it's static %>
     <div class="text-center mt-4">
-      <%= link_to "View All Games", contents_path, class: "custom-btn btn-danger btn-md" %>
+      <%= link_to contents_path, class: "custom-btn btn-danger btn-md" do %>
+        View All Games
+        <i class="fas fa-arrow-right ms-2"></i>
+      <% end %>
     </div>
   </div>
 </div>
 
 <%# Newsletter Section - Not cached because it contains a form %>
-<div class="newsletter-section bg-light py-5 mt-5">
+<div class="newsletter-section py-5 mt-5">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
-        <h3>Stay Updated</h3>
-        <p class="mb-4">Get weekly insights on game development and exclusive feedback opportunities.</p>
-        <%= render "shared/newsletter_form" %>
+        <div class="newsletter-content">
+          <h3 class="section-title">Stay Updated</h3>
+          <p class="section-subtitle mb-4">Get weekly insights on game development and exclusive feedback opportunities.</p>
+          <%= render "shared/newsletter_form" %>
+        </div>
       </div>
     </div>
   </div>

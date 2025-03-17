@@ -1,12 +1,15 @@
-// Graphical variables
-@import "config/fonts";
+// Import config files in correct order
 @import "config/colors";
 @import "config/bootstrap_variables";
+@import "config/variables";
+@import "config/fonts";
 
 // External libraries
 @import "bootstrap";
 @import "font-awesome";
 
-// Your CSS partials
+// Import components through index
 @import "components/index";
+
+// Finally import pages
 @import "pages/index";
