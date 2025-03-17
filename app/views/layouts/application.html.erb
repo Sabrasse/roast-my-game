@@ -5,6 +5,8 @@
     <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'Roast My Game helps game developers gather real feedback from the community to improve their projects.' %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
