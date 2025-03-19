@@ -1,37 +1,45 @@
+<%# Banner Component with Code Animation %>
 <% title ||= "Default Title" %>
 <% tagline ||= "Default tagline goes here." %>
-<% button_text ||= nil %>  <%# Button is optional, so default to nil %>
+<% button_text ||= nil %>
 <% button_path ||= nil %>
 <% button_color ||= "primary" %>
 
-<header class="container banner">
-  <div class="banner-left">
-    <h1 class="banner-title"><%= title %></h1>
+<header class="banner-container" data-controller="banner">
+  <div class="container">
+    <div class="banner-grid">
+      <div class="banner-content">
+        <h1 class="banner-title typewriter"><%= title %></h1>
 
-    <h2 class="banner-tagline">
-      <%= simple_format(tagline, {}, wrapper_tag: "span") %>
-    </h2>
+        <h2 class="banner-tagline">
+          <%= simple_format(tagline, {}, wrapper_tag: "span") %>
+        </h2>
 
-    <!-- Stats row -->
-    <div class="banner-stats">
-      <div class="stat">
-        <span class="stat-value">450+</span>
-        <span class="stat-label">honest feedbacks</span>
+        <div class="banner-stats">
+          <div class="stat fade-in">
+            <span class="stat-value" data-banner-target="counter" data-target="450">0</span>
+            <span class="stat-label">honest feedbacks</span>
+          </div>
+          <div class="stat fade-in" style="animation-delay: 0.2s">
+            <span class="stat-value" data-banner-target="counter" data-target="200">0</span>
+            <span class="stat-label">games improved</span>
+          </div>
+          <div class="stat fade-in" style="animation-delay: 0.4s">
+            <span class="stat-value" data-banner-target="counter" data-target="98">0</span>
+            <span class="stat-label">% satisfaction</span>
+          </div>
+        </div>
+
+        <div class="banner-cta fade-in" style="animation-delay: 0.6s">
+          <%= custom_button(button_text, button_path, color: button_color, extra_classes: "") %>
+        </div>
       </div>
-      <div class="stat">
-        <span class="stat-value">200+</span>
-        <span class="stat-label">games improved</span>
+
+      <div class="banner-visual">
+        <div class="code-window">
+          <%= image_tag "banner-code.webp", alt: "Code sample", class: "code-image" %>
+        </div>
       </div>
     </div>
-
-    <!-- CTA Button -->
-    <%= custom_button(button_text, button_path, color: button_color) %>
-  </div>
-
-  <div class="banner-right">
-    <%# <!-- Replace this placeholder with your actual image or illustration -->
-    <div class="placeholder-image">
-      <!-- e.g., <%= image_tag "hero_image.png" %>
-    <%# </div> %>
   </div>
 </header>

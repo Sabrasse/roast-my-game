@@ -5,8 +5,8 @@
 <%# Hero Section - Not cached because it's static content %>
 <div class="banner-wrapper">
   <%= render "shared/banner",
-    title: "Transform Your Game with Expert Feedback",
-    tagline: "Join a community of passionate game developers. Get actionable insights, improve your game's mechanics, and connect with fellow creators who understand your journey.",
+    title: "Get expert feedback, improve your game",
+    tagline: " Share your project, get detailed reviews and take your game to the next level with actionable insights from players and developers.",
     button_text: "Upload Your Game",
     button_path: new_content_path,
     button_color: "danger" %>
@@ -21,20 +21,13 @@
       <%# This section is cached because testimonials don't change frequently %>
       <%= render "shared/testimony" %>
     <% end %>
-
-  <%# Value Proposition Section - Cached because it's static %>
-  <div class="value-proposition my-5">
-    <%= cache_if(Rails.env.production?, "features") do %>
-      <%# Features are static content, so we cache them %>
-      <%= render "shared/feature" %>
-    <% end %>
   </div>
-
+  
   <%# Latest Games Section - Uses Russian Doll Caching %>
   <div class="latest-games my-5">
     <div class="section-header">
       <span class="section-label">Latest Games</span>
-      <h2 class="section-title">Games Being Reviewed</h2>
+      <h2 class="section-title">Games being Reviewed</h2>
       <p class="section-subtitle">Discover what other developers are working on and join the conversation</p>
     </div>
 
@@ -55,6 +48,14 @@
         <i class="fas fa-arrow-right ms-2"></i>
       <% end %>
     </div>
+  </div>
+
+  <%# Value Proposition Section - Cached because it's static %>
+  <div class="value-proposition my-5">
+    <%= cache_if(Rails.env.production?, "features") do %>
+      <%# Features are static content, so we cache them %>
+      <%= render "shared/feature" %>
+    <% end %>
   </div>
 </div>
 

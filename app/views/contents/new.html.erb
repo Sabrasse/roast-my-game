@@ -1,8 +1,8 @@
 <div class="container">
   <div class="upload-game my-5">
+  <%= link_to "← Back to Games", root_path, class: "text-decoration-none" %>
     <div class="content-form">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <%= link_to "← Back to Games", root_path, class: "text-decoration-none" %>
         <h1 class="h3 mb-0">Upload Your Game</h1>
       </div>
 
@@ -37,7 +37,7 @@
         <div class="d-grid gap-2">
           <%= f.button :submit, 
             "Publish my game", 
-            class: "custom-btn btn-warning",
+            class: "custom-btn btn-danger",
             data: { 
               disable_with: '<i class="fas fa-spinner fa-spin"></i> Publishing...'
             } %>
