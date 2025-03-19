@@ -1,16 +1,128 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: $primary;
+// Navbar Styles
+.navbar {
+  background: rgba($primary, 0.05);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba($primary, 0.1);
+  padding: 1rem 0;
 
-  a {
+  .container {
+    max-width: $breakpoint-xl;
+  }
+
+  // Brand
+  .navbar-brand {
+    h1 {
+      color: $light;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+  }
+
+  // Toggle Button
+  .navbar-toggler {
+    border: none;
     color: $light;
+    padding: 0.5rem;
+    font-size: 1.25rem;
+
+    &:focus {
+      box-shadow: none;
+      color: $warning;
+    }
+  }
+
+  // Navigation Links
+  .nav-link {
+    color: rgba($light, 0.7);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: $transition-base;
+
+    &:hover {
+      color: $warning;
+    }
+
+    &.active {
+      color: $warning;
+    }
+  }
+
+  // Dropdown
+  .dropdown-toggle {
+    &::after {
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+  }
+
+  .dropdown-menu {
+    background: rgba($primary, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba($primary, 0.1);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    box-shadow: $shadow-lg;
+
+    .dropdown-item {
+      color: rgba($light, 0.7);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      transition: $transition-base;
+
+      &:hover {
+        background: rgba($primary, 0.5);
+        color: $warning;
+      }
+    }
+
+    .dropdown-divider {
+      border-color: rgba($primary, 0.1);
+      margin: 0.5rem 0;
+    }
+  }
+
+  // Avatar
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba($warning, 0.2);
+  }
+
+  // Sign Up Button
+  .custom-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
   }
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
+// Responsive Design
+@include responsive($breakpoint-md) {
+  .navbar {
+    padding: 0.75rem 0;
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+    .navbar-collapse {
+      background: rgba($primary, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      margin-top: 1rem;
+      border: 1px solid rgba($primary, 0.1);
+
+      .navbar-nav {
+        gap: 0.5rem;
+      }
+
+      .nav-item {
+        padding: 0.5rem 0;
+      }
+
+      .custom-btn {
+        margin-top: 0.5rem;
+        width: 100%;
+      }
+    }
+  }
 }

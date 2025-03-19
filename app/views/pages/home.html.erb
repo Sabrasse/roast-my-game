@@ -5,8 +5,8 @@
 <%# Hero Section - Not cached because it's static content %>
 <div class="banner-wrapper">
   <%= render "shared/banner",
-    title: "Transform Your Game with Expert Feedback",
-    tagline: "Join a community of passionate game developers. Get actionable insights, improve your game's mechanics, and connect with fellow creators who understand your journey.",
+    title: "Get expert feedback, improve your game",
+    tagline: " Share your project, get detailed reviews and take your game to the next level with actionable insights from players and developers.",
     button_text: "Upload Your Game",
     button_path: new_content_path,
     button_color: "danger" %>
@@ -14,61 +14,23 @@
 
 <div class="container">
   <%# Social Proof Section - Cached because it rarely changes %>
-  <div class="social-proof my-5">
+  <div class="social-proof my-8">
     <%# cache_if means: only cache in production %>
     <%= cache_if(Rails.env.production?, "testimonials") do %>
       <%# Adding a comment to explain the caching strategy %>
       <%# This section is cached because testimonials don't change frequently %>
       <%= render "shared/testimony" %>
     <% end %>
+  </div>
+  
+  <%# Latest Games Section %>
+  <%= render "shared/latest_games" %>
 
   <%# Value Proposition Section - Cached because it's static %>
-  <div class="value-proposition my-5">
+  <div class="value-proposition my-8">
     <%= cache_if(Rails.env.production?, "features") do %>
       <%# Features are static content, so we cache them %>
       <%= render "shared/feature" %>
     <% end %>
-  </div>
-
-  <%# Latest Games Section - Uses Russian Doll Caching %>
-  <div class="latest-games my-5">
-    <div class="section-header">
-      <span class="section-label">Latest Games</span>
-      <h2 class="section-title">Games Being Reviewed</h2>
-      <p class="section-subtitle">Discover what other developers are working on and join the conversation</p>
-    </div>
-
-    <div class="content-grid">
-      <%# Each game card is cached individually %>
-      <% @latest_games.each do |content| %>
-        <%= cache(["v1", content]) do %>
-          <%# The "v1" namespace allows us to invalidate all caches if we change the design %>
-          <%= render "contents/content_card", content: content %>
-        <% end %>
-      <% end %>
-    </div>
-    
-    <%# Call to Action - Not cached because it's static %>
-    <div class="text-center mt-4">
-      <%= link_to contents_path, class: "custom-btn btn-danger btn-md" do %>
-        View All Games
-        <i class="fas fa-arrow-right ms-2"></i>
-      <% end %>
-    </div>
-  </div>
-</div>
-
-<%# Newsletter Section - Not cached because it contains a form %>
-<div class="newsletter-section py-5 mt-5">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6 text-center">
-        <div class="newsletter-content">
-          <h3 class="section-title">Stay Updated</h3>
-          <p class="section-subtitle mb-4">Get weekly insights on game development and exclusive feedback opportunities.</p>
-          <%= render "shared/newsletter_form" %>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

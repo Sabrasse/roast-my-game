@@ -66,6 +66,10 @@ $font-sizes: (
   .text-lg {
     font-size: font-size('base');
   }
+
+  .text-base {
+    font-size: font-size('sm');
+  }
 }
 
 // Base typography
