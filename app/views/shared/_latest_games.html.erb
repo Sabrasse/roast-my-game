@@ -1,0 +1,26 @@
+<%# Latest Games Section - Uses Russian Doll Caching %>
+<%= cache_if(Rails.env.production?, "latest_games") do %>
+  <div class="latest-games-section my-8">
+    <div class="latest-games-header">
+      <span class="section-label">Latest Games</span>
+      <h2 class="section-title">Games being Reviewed</h2>
+      <p class="section-subtitle">Discover what other developers are working on and join the conversation</p>
+    </div>
+    <div class="latest-games-grid">
+      <%# Each game card is cached individually %>
+      <% @latest_games.first(3).each do |content| %>
+        <%= cache(["v1", content]) do %>
+          <%# The "v1" namespace allows us to invalidate all caches if we change the design %>
+          <%= render "contents/content_card", content: content %>
+        <% end %>
+      <% end %>
+    </div>
+    <%# Call to Action - Not cached because it's static %>
+    <div class="text-center mt-4">
+      <%= link_to contents_path, class: "custom-btn btn-danger btn-md" do %>
+        View All Games
+        <i class="fas fa-arrow-right ms-2"></i>
+      <% end %>
+    </div>
+  </div>
+<% end %> 

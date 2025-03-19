@@ -20,9 +20,15 @@ export default class extends Controller {
         current += step
         if (current < target) {
           counter.textContent = Math.round(current)
+          if (counter.dataset.target === "98") {
+            counter.textContent += "%"
+          }
           requestAnimationFrame(updateCounter)
         } else {
           counter.textContent = target
+          if (counter.dataset.target === "98") {
+            counter.textContent += "%"
+          }
         }
       }
 

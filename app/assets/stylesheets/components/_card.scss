@@ -36,12 +36,11 @@
   padding: 0 spacing('sm');
   max-width: $breakpoint-xl;
   margin: 0 auto;
-  margin-bottom: spacing('2xl');
 }
 
 // Common Card Styles
 .card-base {
-  background: $primary;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 1.25rem;
   padding: spacing('lg');
   box-shadow: $shadow-sm, $shadow-lg;
@@ -50,9 +49,6 @@
 }
 
 // Testimonials Section
-.testimonials-section {
-  background: $gradient-primary;
-}
 
 .testimonials-header {
   @extend .section-header;
@@ -138,9 +134,6 @@
 }
 
 // Features Section
-.features-section {
-  padding: spacing('xl') 0;
-}
 
 .features-header {
   @extend .section-header;
@@ -160,7 +153,7 @@
 
   .feature-icon {
     @extend .text-2xl;
-    color: $success;
+    color: $warning;
     margin-bottom: spacing('xs');
   }
 
@@ -214,7 +207,7 @@
   position: absolute;
   inset: 0;
   background: $gradient-overlay;
-  color: white;
+  // color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -233,6 +226,7 @@
   @extend .text-sm;
   opacity: 0.9;
   margin: 0;
+  color: $light;
 }
 
 // Newsletter Section
@@ -299,7 +293,7 @@
 
 // Comments Section
 .comments-section {
-  background: white;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: 0 4px 20px rgba($primary, 0.1);
@@ -341,19 +335,28 @@
   }
 }
 
+// Latest Games Section
+.latest-games-header {
+  @extend .section-header;
+}
+
+.latest-games-grid {
+  @extend .grid-layout;
+}
+
 // Responsive Design
 @include responsive($breakpoint-md) {
-  .testimonials-section,
-  .features-section {
-    padding: spacing('xl') 0;
-  }
-
-  .section-header {
+  .section-header,
+  .testimonials-header,
+  .features-header,
+  .latest-games-header {
     padding: 0 spacing('sm');
   }
 
   .grid-layout,
-  .content-grid {
+  .testimonials-grid,
+  .features-grid,
+  .latest-games-grid {
     grid-template-columns: 1fr;
     gap: spacing('md');
   }
@@ -377,4 +380,20 @@
   .comments-section {
     padding: 1.5rem;
   }
+}
+
+// Custom spacing utilities
+.my-6 {
+  margin-top: 6rem !important;
+  margin-bottom: 6rem !important;
+}
+
+.my-8 {
+  margin-top: 8rem !important;
+  margin-bottom: 8rem !important;
+}
+
+// Override for social-proof section
+.social-proof.my-8 {
+  margin-top: 4rem !important;
 }
