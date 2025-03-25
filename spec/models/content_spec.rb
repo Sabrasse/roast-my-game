@@ -13,20 +13,20 @@ RSpec.describe Content, type: :model do
     it "is invalid without a description" do
       content = Content.new(description: "")
       expect(content).to_not be_valid
-      expect(content.errors[:description]).to include("must be at least 10 characters")
+      expect(content.errors[:description]).to include("must be between 10 and 100 characters")
     end
 
     it "is invalid if description is too short" do
       content = Content.new(description: "Short")
       expect(content).to_not be_valid
-      expect(content.errors[:description]).to include("must be at least 10 characters")
+      expect(content.errors[:description]).to include("must be between 10 and 100 characters")
     end
 
     it "is invalid if description exceeds 100 characters" do
       long_description = "a" * 101  # 101 characters
       content = Content.new(description: long_description)
       expect(content).to_not be_valid
-      expect(content.errors[:description]).to include("must not exceed 100 characters")
+      expect(content.errors[:description]).to include("must be between 10 and 100 characters")
     end
 
     it "is valid if description is exactly 100 characters" do
