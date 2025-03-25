@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home]
+  skip_before_action :authenticate_user!, only: [:home, :about]
 
   def home
     # Cache the latest games query for 1 hour
@@ -10,5 +10,8 @@ class PagesController < ApplicationController
             .order(created_at: :desc)
             .limit(6)
     end
+  end
+
+  def about
   end
 end

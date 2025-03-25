@@ -258,18 +258,6 @@
       border-color: rgba($success, 0.5);
     }
   }
-
-  .btn {
-    padding: spacing('xs') spacing('lg');
-    font-weight: 600;
-    background-color: $success;
-    border-color: $success;
-
-    &:hover {
-      background-color: darken($success, 5%);
-      border-color: darken($success, 5%);
-    }
-  }
 }
 
 // Content Details
