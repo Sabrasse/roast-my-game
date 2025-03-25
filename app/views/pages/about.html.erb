@@ -3,80 +3,76 @@
 <% provide(:meta_description, "Learn about Roast My Game - A platform for game developers to get honest feedback and improve their games.") %>
 
 <div class="container">
-  <div class="about-section my-5">
-    <%# Header %>
-    <div class="text-center mb-5">
-      <h1 class="display-4 mb-3">About Roast My Game</h1>
-      <p class="lead text-muted">A platform for game developers to get honest feedback and improve their games</p>
+  <div class="about-section my-8">
+    <div class="d-flex align-items-center mb-4">
+      <%= link_to root_path, class: "text-decoration-none me-3", aria: { label: "Go back to home page" } do %>
+        <i class="fas fa-arrow-left text-warning"></i>
+      <% end %>
+      <div>
+        <h1 class="h3 mb-1">About Roast My Game</h1>
+        <p class="mb-0">A platform for game developers to get honest feedback and improve their games</p>
+      </div>
     </div>
 
     <%# Main Content %>
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        <%# Mission Statement %>
-        <div class="card mb-4">
-          <div class="card-body">
-            <h2 class="h3 mb-3">Our Mission</h2>
-            <p>Roast My Game is dedicated to helping game developers improve their projects through honest, constructive feedback. We believe that every game can be better, and sometimes it takes an outside perspective to see what needs improvement.</p>
+    <div class="card-base">
+      <%# Mission Statement %>
+      <div class="mb-6">
+        <h2 class="h3 mb-3">Our Mission</h2>
+        <p>Roast My Game is dedicated to helping game developers improve their projects through honest, constructive feedback. We believe that every game can be better, and sometimes it takes an outside perspective to see what needs improvement.</p>
+      </div>
+
+      <%# How It Works %>
+      <div class="mb-6">
+        <h2 class="h3 mb-3">How It Works</h2>
+        <ol class="list-unstyled">
+          <li class="mb-4">
+            <h4 class="h5">1. Upload Your Game</h4>
+            <p>Share your game with the community by uploading screenshots, videos, or descriptions.</p>
+          </li>
+          <li class="mb-4">
+            <h4 class="h5">2. Get Feedback</h4>
+            <p>Receive honest feedback from other developers and gamers who want to help you improve.</p>
+          </li>
+          <li class="mb-4">
+            <h4 class="h5">3. Improve & Iterate</h4>
+            <p>Use the feedback to make your game better and share your progress with the community.</p>
+          </li>
+        </ol>
+      </div>
+
+      <%# Contact Section %>
+      <div>
+        <h2 class="h3 mb-3">Get in Touch</h2>
+        <p>Have questions or suggestions? We'd love to hear from you!</p>
+        <div class="d-flex flex-column gap-3">
+          <%# Email %>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-envelope fa-lg me-3 text-warning"></i>
+            <a href="mailto:contact@roastmygame.com" class="text-decoration-none">
+              contact@roastmygame.com
+            </a>
           </div>
-        </div>
 
-        <%# How It Works %>
-        <div class="card mb-4">
-          <div class="card-body">
-            <h2 class="h3 mb-3">How It Works</h2>
-            <ol class="list-unstyled">
-              <li class="mb-3">
-                <h4 class="h5">1. Upload Your Game</h4>
-                <p>Share your game with the community by uploading screenshots, videos, or descriptions.</p>
-              </li>
-              <li class="mb-3">
-                <h4 class="h5">2. Get Feedback</h4>
-                <p>Receive honest feedback from other developers and gamers who want to help you improve.</p>
-              </li>
-              <li class="mb-3">
-                <h4 class="h5">3. Improve & Iterate</h4>
-                <p>Use the feedback to make your game better and share your progress with the community.</p>
-              </li>
-            </ol>
+          <%# Calendly %>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-calendar fa-lg me-3 text-warning"></i>
+            <a href="https://calendly.com/roastmygame" target="_blank" class="text-decoration-none">
+              Schedule a Call
+            </a>
           </div>
-        </div>
 
-        <%# Contact Section %>
-        <div class="card">
-          <div class="card-body">
-            <h2 class="h3 mb-3">Get in Touch</h2>
-            <p>Have questions or suggestions? We'd love to hear from you!</p>
-            <div class="d-flex flex-column gap-3">
-              <%# Email %>
-              <div class="d-flex align-items-center">
-                <i class="fas fa-envelope fa-lg me-3 text-warning"></i>
-                <a href="mailto:contact@roastmygame.com" class="text-decoration-none">
-                  contact@roastmygame.com
-                </a>
-              </div>
-
-              <%# Calendly %>
-              <div class="d-flex align-items-center">
-                <i class="fas fa-calendar fa-lg me-3 text-warning"></i>
-                <a href="https://calendly.com/roastmygame" target="_blank" class="text-decoration-none">
-                  Schedule a Call
-                </a>
-              </div>
-
-              <%# Social Links %>
-              <div class="d-flex gap-3 mt-2">
-                <a href="https://twitter.com/roastmygame" target="_blank" class="text-decoration-none">
-                  <i class="fab fa-twitter fa-lg text-warning"></i>
-                </a>
-                <a href="https://github.com/roastmygame" target="_blank" class="text-decoration-none">
-                  <i class="fab fa-github fa-lg text-warning"></i>
-                </a>
-                <a href="https://discord.gg/roastmygame" target="_blank" class="text-decoration-none">
-                  <i class="fab fa-discord fa-lg text-warning"></i>
-                </a>
-              </div>
-            </div>
+          <%# Social Links %>
+          <div class="d-flex gap-3 mt-2">
+            <a href="https://twitter.com/roastmygame" target="_blank" class="text-decoration-none">
+              <i class="fab fa-twitter fa-lg text-warning"></i>
+            </a>
+            <a href="https://github.com/roastmygame" target="_blank" class="text-decoration-none">
+              <i class="fab fa-github fa-lg text-warning"></i>
+            </a>
+            <a href="https://discord.gg/roastmygame" target="_blank" class="text-decoration-none">
+              <i class="fab fa-discord fa-lg text-warning"></i>
+            </a>
           </div>
         </div>
       </div>

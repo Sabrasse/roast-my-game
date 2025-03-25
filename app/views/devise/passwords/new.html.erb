@@ -1,18 +1,38 @@
-<h2>Forgot your password?</h2>
-
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
+<% content_for :auth_title do %>
+  Forgot your password?
 <% end %>
 
-<%= render "devise/shared/links" %>
+<% content_for :auth_subtitle do %>
+  Enter your email to receive reset instructions
+<% end %>
+
+<% content_for :auth_content do %>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "needs-validation" }) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-group mb-4">
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { 
+                    class: "form-control",
+                    autocomplete: "email" 
+                  } %>
+    </div>
+
+    <div class="d-grid gap-2">
+      <%= f.button :submit, 
+                  "Reset password", 
+                  class: "custom-btn btn-danger",
+                  data: { 
+                    disable_with: '<i class="fas fa-spinner fa-spin"></i> Sending...'
+                  } %>
+    </div>
+
+    <div class="mt-4 text-center">
+      <%= render "devise/shared/links" %>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render "devise/shared/auth_form" %>

@@ -3,46 +3,50 @@
 <% provide(:meta_description, "Browse and discover games to roast. Share your thoughts and engage with the gaming community.") %>
 
 <div class="container">
-  <%# Header section %>
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h1 class="h2 mb-2">Browse Games</h1>
-      <p class="text-muted">Discover games and share your thoughts</p>
-    </div>
-    <% if user_signed_in? %>
-      <%= link_to new_content_path, class: "custom-btn btn-warning" do %>
-        <i class="fas fa-plus me-2"></i>Upload Game
+  <div class="browse-section my-8">
+    <div class="d-flex align-items-center mb-4">
+      <%= link_to root_path, class: "text-decoration-none me-3" do %>
+        <i class="fas fa-arrow-left text-warning"></i>
       <% end %>
-    <% end %>
-  </div>
-
-  <%# Content grid %>
-  <div class="content-grid">
-    <% if @contents.any? %>
-      <% @contents.each do |content| %>
-        <%= render partial: "content_card", locals: { content: content } %>
-      <% end %>
-    <% else %>
-      <div class="text-center py-5">
-        <h3 class="h4 mb-3">No games yet</h3>
-        <p class="text-muted mb-4">Be the first to upload a game!</p>
-        <% if user_signed_in? %>
-          <%= link_to new_content_path, class: "custom-btn btn-warning" do %>
-            <i class="fas fa-plus me-2"></i>Upload Your First Game
-          <% end %>
-        <% else %>
-          <%= link_to new_user_session_path, class: "custom-btn btn-warning" do %>
-            <i class="fas fa-sign-in-alt me-2"></i>Sign In to Upload
-          <% end %>
+      <div>
+        <h1 class="h3 mb-1">Browse Games</h1>
+        <p class="mb-0">Discover games and share your thoughts</p>
+      </div>
+      <% if user_signed_in? %>
+        <%= link_to new_content_path, class: "custom-btn btn-warning ms-auto" do %>
+          <i class="fas fa-plus me-2"></i>Upload Game
         <% end %>
+      <% end %>
+    </div>
+
+    <%# Content grid %>
+    <div class="content-grid">
+      <% if @contents.any? %>
+        <% @contents.each do |content| %>
+          <%= render partial: "content_card", locals: { content: content } %>
+        <% end %>
+      <% else %>
+        <div class="text-center py-5">
+          <h3 class="h4 mb-3">No games yet</h3>
+          <p class="text-muted mb-4">Be the first to upload a game!</p>
+          <% if user_signed_in? %>
+            <%= link_to new_content_path, class: "custom-btn btn-warning" do %>
+              <i class="fas fa-plus me-2"></i>Upload Your First Game
+            <% end %>
+          <% else %>
+            <%= link_to new_user_session_path, class: "custom-btn btn-warning" do %>
+              <i class="fas fa-sign-in-alt me-2"></i>Sign In to Upload
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <%# Pagination %>
+    <% if @contents.any? %>
+      <div class="d-flex justify-content-center mt-6">
+        <%= paginate @contents %>
       </div>
     <% end %>
   </div>
-
-  <%# Pagination %>
-  <% if @contents.any? %>
-    <div class="d-flex justify-content-center mt-6">
-      <%= paginate @contents %>
-    </div>
-  <% end %>
 </div> 
