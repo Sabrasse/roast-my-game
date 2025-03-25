@@ -5,10 +5,6 @@
 }
 
 .content-form {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 2rem;
-  // background: white;
   border-radius: 1.25rem;
   box-shadow: 0 1px 3px rgba($primary, 0.05), 0 4px 20px rgba($primary, 0.08);
   border: 1px solid rgba($primary, 0.05);
@@ -31,6 +27,7 @@
     font-size: 1rem;
     transition: all 0.3s ease;
     color: $light;
+    background: rgba(255, 255, 255, 0.05);
 
     &:focus {
       border-color: rgba($success, 0.5);
@@ -88,8 +85,7 @@
   }
 
   .content-form {
-    padding: 1.5rem;
-    margin: 0 1rem;
+    padding: 0rem;
   }
 
   .form-control[type="file"] {

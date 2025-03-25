@@ -1,5 +1,5 @@
 <%# Main Navigation %>
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <%# Brand %>
     <%= link_to root_path, class: "navbar-brand" do %>
@@ -19,6 +19,9 @@
         </li>
         <li class="nav-item">
           <%= link_to "Upload Game", new_content_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "About", about_path, class: "nav-link" %>
         </li>
       </ul>
 

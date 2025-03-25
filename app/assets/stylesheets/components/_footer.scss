@@ -115,20 +115,6 @@
             color: rgba($light, 0.5);
           }
         }
-
-        .btn {
-          background: $warning;
-          border: none;
-          color: $primary;
-          font-weight: 600;
-          padding: 0.75rem 1.5rem;
-          border-radius: 0.5rem;
-          transition: $transition-base;
-
-          &:hover {
-            background: darken($warning, 5%);
-          }
-        }
       }
     }
   }

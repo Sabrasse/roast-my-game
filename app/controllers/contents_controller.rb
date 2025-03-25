@@ -1,20 +1,21 @@
 class ContentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :new, :create]
-  before_action :set_content, only: [:show, :edit, :update, :destroy, :claim]
-  before_action :ensure_owner, only: [:edit, :update, :destroy]
+  before_action :set_content, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
 
   def index
-    @contents = Content.recent.includes(:user)
+    @contents = Content.includes(:user)
+                      .recent
+                      .page(params[:page])
+                      .per(12)
   end
 
   def show
+    @comments = @content.comments.includes(:user).order(created_at: :desc)
   end
 
   def new
     @content = Content.new
-  end
-
-  def edit
   end
 
   def create
@@ -22,19 +23,18 @@ class ContentsController < ApplicationController
     @content.user = current_user if user_signed_in?
 
     if @content.save
-      flash[:notice] = "Your content was successfully uploaded!"
-      redirect_to root_path
+      redirect_to @content, notice: 'Game was successfully created.'
     else
-      Rails.logger.error "Content validation errors: #{@content.errors.full_messages.join(', ')}"
-      flash.now[:alert] = "Please fix the errors below: #{@content.errors.full_messages.join(', ')}"
       render :new, status: :unprocessable_entity
     end
   end
 
+  def edit
+  end
+
   def update
     if @content.update(content_params)
-      flash[:notice] = "Your content was successfully updated!"
-      redirect_to @content
+      redirect_to @content, notice: 'Game was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,21 +42,7 @@ class ContentsController < ApplicationController
 
   def destroy
     @content.destroy
-    flash[:notice] = "Your content was successfully deleted."
-    redirect_to contents_path, status: :see_other
-  end
-
-  # Allow registered users to claim anonymous content
-  def claim
-    return unless user_signed_in? && @content.user_id.nil?
-    
-    if @content.session_token == cookies[:content_session_token]
-      @content.update(user: current_user, session_token: nil)
-      flash[:notice] = "Content successfully claimed to your account!"
-    else
-      flash[:alert] = "You can only claim content from your current session"
-    end
-    redirect_to @content
+    redirect_to contents_url, notice: 'Game was successfully deleted.'
   end
 
   private
@@ -66,13 +52,12 @@ class ContentsController < ApplicationController
   end
 
   def content_params
-    params.require(:content).permit(:media, :description)
+    params.require(:content).permit(:description, :media)
   end
 
-  def ensure_owner
+  def authorize_user!
     unless @content.user == current_user
-      flash[:alert] = "You are not authorized to perform this action."
-      redirect_to contents_path
+      redirect_to @content, alert: 'You are not authorized to perform this action.'
     end
   end
 end
