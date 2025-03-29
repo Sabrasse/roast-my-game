@@ -281,7 +281,7 @@
 
 // Comments Section
 .comments-section {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
   padding: 2rem;
   box-shadow: 0 4px 20px rgba($primary, 0.1);
@@ -294,6 +294,7 @@
     padding: 1rem;
     font-size: 1rem;
     transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
 
     &:focus {
       border-color: rgba($success, 0.5);
@@ -303,18 +304,10 @@
 }
 
 .comment-card {
-  background: rgba($primary, 0.02);
-  border-radius: 0.75rem;
   padding: 1rem;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: rgba($primary, 0.05);
-  }
 
   .comment-header {
     font-size: 0.875rem;
-    color: rgba($primary, 0.8);
   }
 
   .comment-body {

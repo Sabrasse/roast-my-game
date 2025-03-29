@@ -1,0 +1,20 @@
+<%# Authentication form wrapper with consistent styling %>
+<div class="container">
+  <div class="upload-section my-8">
+    <div class="d-flex align-items-center mb-4">
+      <%= link_to root_path, class: "text-decoration-none me-3" do %>
+        <i class="fas fa-arrow-left text-warning"></i>
+      <% end %>
+      <div>
+        <h1 class="h3 mb-1"><%= yield :auth_title %></h1>
+        <p class="mb-0"><%= yield :auth_subtitle %></p>
+      </div>
+    </div>
+
+    <div class="card-base">
+      <div class="content-form">
+        <%= yield :auth_content %>
+      </div>
+    </div>
+  </div>
+</div> 
