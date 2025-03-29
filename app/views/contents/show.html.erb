@@ -18,6 +18,11 @@
       <% end %>
     </div>
 
+    <%# Description %>
+    <div class="content-description mb-4">
+      <p class="lead"><%= @content.description %></p>
+    </div>
+
     <%# Media display %>
     <div class="content-media-container mb-4">
       <% if @content.media.attached? %>
@@ -30,11 +35,6 @@
           </video>
         <% end %>
       <% end %>
-    </div>
-
-    <%# Description %>
-    <div class="content-description mb-4">
-      <p class="lead"><%= @content.description %></p>
     </div>
 
     <%# Comments section %>
