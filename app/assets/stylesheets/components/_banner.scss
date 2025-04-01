@@ -2,7 +2,7 @@
   min-height: 80vh;
   display: flex;
   align-items: center;
-  padding: 80px 0;
+  padding: 70px 0;
   overflow: hidden;
   position: relative;
 
@@ -43,9 +43,6 @@
   font-weight: 800;
   margin-bottom: 1.5rem;
   line-height: 1.1;
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .banner-tagline {

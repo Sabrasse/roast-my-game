@@ -28,16 +28,8 @@
       <% else %>
         <div class="text-center py-5">
           <h3 class="h4 mb-3">No games yet</h3>
-          <p class="text-muted mb-4">Be the first to upload a game!</p>
-          <% if user_signed_in? %>
-            <%= link_to new_content_path, class: "custom-btn btn-warning" do %>
-              <i class="fas fa-plus me-2"></i>Upload Your First Game
-            <% end %>
-          <% else %>
-            <%= link_to new_user_session_path, class: "custom-btn btn-warning" do %>
-              <i class="fas fa-sign-in-alt me-2"></i>Sign In to Upload
-            <% end %>
-          <% end %>
+          <p class="mb-4">Be the first to upload a game!</p>
+          <%= link_to "Upload your Game", new_content_path, class: "custom-btn btn-danger" %>
         </div>
       <% end %>
     </div>
