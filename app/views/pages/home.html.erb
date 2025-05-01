@@ -3,16 +3,19 @@
 <% provide(:meta_description, "Join the community where game developers receive actionable feedback, improve their games, and connect with fellow creators. Get started today!") %>
 
 <%# Hero Section - Not cached because it's static content %>
-<div class="banner-wrapper">
+<div class="banner-wrapper" style="z-index: 1000;">
   <%= render "shared/banner",
     title: "Get expert feedback, improve your game",
     tagline: " Share your project, get detailed reviews and take your game to the next level with actionable insights from players and developers.",
-    button_text: "Upload your Game",
+    button_text: "Add your Game",
     button_path: new_content_path,
     button_color: "danger" %>
 </div>
 
 <div class="container">
+  <%# Latest Games Section %>
+  <%= render "shared/latest_games" %>
+
   <%# Social Proof Section - Cached because it rarely changes %>
   <div class="social-proof my-8">
     <%# cache_if means: only cache in production %>
@@ -22,9 +25,6 @@
       <%= render "shared/testimony" %>
     <% end %>
   </div>
-  
-  <%# Latest Games Section %>
-  <%= render "shared/latest_games" %>
 
   <%# Value Proposition Section - Cached because it's static %>
   <div class="value-proposition my-8">

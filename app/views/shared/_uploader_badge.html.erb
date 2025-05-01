@@ -1,0 +1,16 @@
+<div class="uploader-status mb-4">
+  <div class="d-flex align-items-center">
+    <span class="me-2">Uploaded by:</span>
+    <% if defined?(user) && user %>
+      <span class="badge bg-success">
+        <i class="fas fa-user-check me-1"></i>
+        <%= user.username %>
+      </span>
+    <% else %>
+      <span class="badge bg-warning text-dark">
+        <i class="fas fa-user-clock me-1"></i>
+        Guest
+      </span>
+    <% end %>
+  </div>
+</div> 
