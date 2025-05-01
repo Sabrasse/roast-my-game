@@ -1,54 +1,73 @@
 <div class="container">
-  <div class="upload-section my-8">
+  <div class="upload-section my-6">
     <div class="d-flex align-items-center mb-4">
       <%= link_to root_path, class: "text-decoration-none me-3" do %>
         <i class="fas fa-arrow-left text-warning"></i>
       <% end %>
       <div>
-        <h1 class="h3 mb-1">Upload Your Game</h1>
+        <h1 class="h3 mb-1">Add Your Game</h1>
         <p class="mb-0">Share your project and get valuable feedback from our community</p>
       </div>
     </div>
 
-    <div class="card-base">
-      <div class="content-form">
-        <%= simple_form_for @content, html: { class: "needs-validation" } do |f| %>
-          <div class="form-group mb-4">
-            <%= f.input :media, 
-              label: "Upload Media", 
-              as: :file, 
-              required: true,
-              hint: "Max 50MB for videos, 5MB for images",
-              input_html: { 
-                class: "form-control",
-                data: { 
-                  controller: "file-upload",
-                  action: "change->file-upload#validate"
-                }
-              } %>
-            <div class="invalid-feedback" data-file-upload-target="error"></div>
-          </div>
+    <div class="row" data-controller="file-upload">
+      <div class="col-md-7">
+        <div class="card-base">
+          <div class="content-form">
+            <%= simple_form_for @content, html: { class: "needs-validation" } do |f| %>
+              <div class="form-group mb-4">
+                <%= f.input :media, 
+                  label: "Upload Media", 
+                  as: :file, 
+                  required: true,
+                  hint: "Max 50MB for videos, 5MB for images",
+                  input_html: { 
+                    class: "form-control",
+                    data: { 
+                      action: "change->file-upload#validate change->file-upload#preview"
+                    }
+                  } %>
+                <div class="invalid-feedback" data-file-upload-target="error"></div>
+              </div>
 
-          <div class="form-group mb-4">
-            <%= f.input :description, 
-              label: "Description", 
-              as: :text, 
-              placeholder: "Describe your game, its features, and what kind of feedback you're looking for...",
-              input_html: { 
-                class: "form-control",
-                rows: 5
-              } %>
-          </div>
+              <div class="form-group mb-4">
+                <%= f.input :description, 
+                  label: "Description", 
+                  as: :text, 
+                  placeholder: "Describe your game, its features, and what kind of feedback you're looking for...",
+                  input_html: { 
+                    class: "form-control",
+                    rows: 5
+                  } %>
+              </div>
 
-          <div class="d-grid gap-2">
-            <%= f.button :submit, 
-              "Publish my game", 
-              class: "custom-btn btn-danger",
-              data: { 
-                disable_with: '<i class="fas fa-spinner fa-spin"></i> Publishing...'
-              } %>
+              <%= render "shared/uploader_badge", user: current_user %>
+
+              <div class="d-grid gap-2">
+                <%= f.button :submit, 
+                  "Publish my game", 
+                  class: "custom-btn btn-danger",
+                  data: { 
+                    disable_with: '<i class="fas fa-spinner fa-spin"></i> Publishing...'
+                  } %>
+              </div>
+            <% end %>
           </div>
-        <% end %>
+        </div>
+      </div>
+      
+      <div class="col-md-5">
+        <div class="card-base">
+          <div class="preview-section">
+            <h3 class="h5 mb-3">Preview</h3>
+            <div class="preview-container" data-file-upload-target="preview">
+              <div class="preview-placeholder">
+                <i class="fas fa-image fa-3x text-muted"></i>
+                <p class="mt-2 mb-0 text-muted">Your media will appear here</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

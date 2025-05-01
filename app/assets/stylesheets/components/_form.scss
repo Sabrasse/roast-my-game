@@ -91,4 +91,79 @@
   .form-control[type="file"] {
     padding: 0.25rem;
   }
+}
+
+.preview-section {
+  padding: 1.5rem;
+
+  .preview-container {
+    width: 100%;
+    min-height: 300px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img, video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .preview-placeholder {
+      text-align: center;
+      padding: 2rem;
+    }
+  }
+}
+
+.uploader-status {
+  .badge {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+
+    &.bg-success {
+      background-color: rgba($success, 0.15) !important;
+      color: $success !important;
+    }
+
+    &.bg-warning {
+      background-color: rgba($warning, 0.15) !important;
+      color: darken($warning, 20%) !important;
+    }
+
+    i {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+// Comment form specific styles
+.comment-form {
+  .form-control {
+    color: $light;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba($primary, 0.1);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+
+    &:focus {
+      border-color: rgba($success, 0.5);
+      box-shadow: 0 0 0 3px rgba($success, 0.1);
+      background-color: rgba(255, 255, 255, 0.08);
+      color: $light;
+    }
+
+    &::placeholder {
+      color: rgba($light, 0.4);
+    }
+  }
 } 

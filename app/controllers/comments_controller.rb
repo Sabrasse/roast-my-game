@@ -8,19 +8,22 @@ class CommentsController < ApplicationController
     @comment = @content.comments.build(comment_params)
     @comment.user = current_user
 
-    if @comment.save
-      flash[:notice] = "Comment was successfully added!"
-    else
-      flash[:alert] = "Error adding comment. Please try again."
+    respond_to do |format|
+      if @comment.save
+        format.turbo_stream
+        format.html { redirect_to @content, notice: "Comment was successfully added!" }
+      else
+        format.html { redirect_to @content, alert: "Error adding comment. Please try again." }
+      end
     end
-
-    redirect_to @content
   end
 
   def destroy
     @comment.destroy
-    flash[:notice] = "Comment was successfully deleted."
-    redirect_to @content
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to @content, notice: "Comment was successfully deleted." }
+    end
   end
 
   private

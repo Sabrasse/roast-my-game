@@ -1,0 +1,18 @@
+<%= turbo_stream.prepend "comments" do %>
+  <%= render "comments/comment", comment: @comment %>
+<% end %>
+
+<%= turbo_stream.update "new_comment" do %>
+  <%= form_with(model: [@content, Comment.new], local: true, data: { turbo: true }) do |f| %>
+    <div class="form-group mb-4">
+      <%= f.text_area :body, 
+        class: "form-control", 
+        rows: 3, 
+        placeholder: "Share your thoughts about this game...",
+        required: true %>
+    </div>
+    <div class="mt-2">
+      <%= f.submit "Post Comment", class: "custom-btn btn-danger" %>
+    </div>
+  <% end %>
+<% end %> 

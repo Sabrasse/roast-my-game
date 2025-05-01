@@ -3,7 +3,7 @@
 <% provide(:meta_description, "Browse and discover games to roast. Share your thoughts and engage with the gaming community.") %>
 
 <div class="container">
-  <div class="browse-section my-8">
+  <div class="browse-section my-6">
     <div class="d-flex align-items-center mb-4">
       <%= link_to root_path, class: "text-decoration-none me-3" do %>
         <i class="fas fa-arrow-left text-warning"></i>
@@ -13,8 +13,8 @@
         <p class="mb-0">Discover games and share your thoughts</p>
       </div>
       <% if user_signed_in? %>
-        <%= link_to new_content_path, class: "custom-btn btn-warning ms-auto" do %>
-          <i class="fas fa-plus me-2"></i>Upload Game
+        <%= link_to new_content_path, class: "custom-btn btn-danger ms-auto" do %>
+          <i class="fas fa-plus me-2"></i>Add Game
         <% end %>
       <% end %>
     </div>

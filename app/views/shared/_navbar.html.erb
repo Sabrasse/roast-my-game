@@ -1,5 +1,5 @@
 <%# Main Navigation %>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="z-index: 2000;">
   <div class="container">
     <%# Brand %>
     <%= link_to root_path, class: "navbar-brand" do %>
@@ -29,15 +29,11 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <div class="d-flex align-items-center">
-                <div class="avatar me-2">
-                  <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "User avatar" %>
-                </div>
-                <span class="d-none d-md-inline"><%= current_user.email %></span>
-              </div>
+            <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag "https://api.dicebear.com/7.x/pixel-art/svg?seed=#{current_user.username}", class: "avatar me-2", alt: "User avatar" %>
+              <span class="d-none d-md-inline"><%= current_user.username %></span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style="z-index: 2001;">
               <li><%= link_to "Profile", "#", class: "dropdown-item" %></li>
               <li><%= link_to "Settings", "#", class: "dropdown-item" %></li>
               <li><hr class="dropdown-divider"></li>

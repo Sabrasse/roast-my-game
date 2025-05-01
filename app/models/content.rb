@@ -20,7 +20,7 @@ class Content < ApplicationRecord
   # Validations
   validates :media, presence: true
   validate :acceptable_media
-  validates :description, presence: true, length: { minimum: 10, maximum: 100, message: "must be between 10 and 100 characters" }
+  validates :description, presence: true, length: { minimum: 10, maximum: 500, message: "must be between 10 and 500 characters" }
 
   # Scopes
   scope :anonymous, -> { where(user_id: nil) }
