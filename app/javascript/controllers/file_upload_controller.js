@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["error", "preview"]
+  static targets = ["error", "preview", "input"]
 
   connect() {
     console.log("File upload controller connected")
@@ -59,6 +59,7 @@ export default class extends Controller {
         img.src = e.target.result
         img.style.maxWidth = '100%'
         img.style.height = 'auto'
+        img.style.borderRadius = '8px'
         previewContainer.appendChild(img)
       }
     }
