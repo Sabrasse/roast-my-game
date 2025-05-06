@@ -7,9 +7,12 @@
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%# Removed javascript_include_tag to avoid double loading %>
     <%= javascript_importmap_tags %>
+    <script>
+      console.log("Layout loaded - Importmaps initialized");
+    </script>
   </head>
 
   <body>

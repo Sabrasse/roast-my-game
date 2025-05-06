@@ -1,17 +1,20 @@
+import { codeSamples } from "code_samples"
 import { Controller } from "@hotwired/stimulus"
-import { codeSamples } from "../code_samples"
+
+console.log("Banner controller loading...");
 
 export default class extends Controller {
   static targets = ["counter", "codeContent"]
 
   connect() {
+    console.log("Banner controller connected");
     this.initializeCounters()
     this.initializeCodeTyping()
   }
 
   initializeCounters() {
     this.counterTargets.forEach(counter => {
-      const target = parseInt(counter.dataset.target)
+      const target = parseInt(counter.getAttribute("data-target"))
       const duration = 2000 // 2 seconds
       const step = target / (duration / 16) // 60fps
       let current = 0
@@ -19,14 +22,14 @@ export default class extends Controller {
       const updateCounter = () => {
         current += step
         if (current < target) {
-          counter.textContent = Math.round(current)
-          if (counter.dataset.target === "98") {
+          counter.textContent = Math.ceil(current)
+          if (counter.getAttribute("data-target") === "98") {
             counter.textContent += "%"
           }
           requestAnimationFrame(updateCounter)
         } else {
           counter.textContent = target
-          if (counter.dataset.target === "98") {
+          if (counter.getAttribute("data-target") === "98") {
             counter.textContent += "%"
           }
         }

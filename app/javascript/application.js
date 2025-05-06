@@ -1,15 +1,15 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 console.log("Application.js loading...");
+
+// Import all required modules
 import "@hotwired/turbo-rails"
-console.log("Turbo Rails loaded");
 import "controllers"
-console.log("Controllers loaded");
 import "@popperjs/core"
-console.log("Popper loaded");
 import "bootstrap"
-console.log("Bootstrap loaded");
-import "./turbo_scroll"
-console.log("Turbo scroll loaded");
+import "turbo_scroll"
+
+// Log successful imports
+console.log("All modules imported successfully");
 
 // Add a DOMContentLoaded listener to check if the page is properly loaded
 document.addEventListener("DOMContentLoaded", () => {
