@@ -26,7 +26,7 @@ namespace :storage do
           )
           
           # Download the file to a temporary file
-          temp_file = Tempfile.new(['migration', File.extname(blob.filename)])
+          temp_file = Tempfile.new(['migration', File.extname(blob.filename.to_s)])
           temp_file.binmode
           
           # Download the file
