@@ -1,0 +1,6 @@
+---
+description: Add automatic tests to main user actions (back and front)
+globs: 
+alwaysApply: false
+---
+When adding new features, or improving ones, take into consideration the addition of tests to avoid regression and keep a clean and maintenable project over time.

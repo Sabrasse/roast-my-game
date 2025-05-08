@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+The project should be as clean and scalable as possible, when you make changes to the project take into account that useless code should be deleted.
+WARNING : Confirm everytime you are about to clean up the existing codebase so it does not create an effect on the project itself.
+
