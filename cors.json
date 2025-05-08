@@ -1,0 +1,12 @@
+[
+    {
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["GET", "POST", "PUT", "DELETE", "HEAD"],
+        "AllowedOrigins": [
+            "https://www.gameroaster.com",
+            "https://gameroaster.com"
+        ],
+        "ExposeHeaders": ["ETag"],
+        "MaxAgeSeconds": 3600
+    }
+] 

@@ -13,8 +13,4 @@ Rails.application.routes.draw do
   end
   # Defines the root path route ("/")
   # root "posts#index"
-
-  # S3 test endpoints
-  get 's3_test', to: 's3_test#test_connection'
-  get 's3_test/upload', to: 's3_test#test_upload'
 end
