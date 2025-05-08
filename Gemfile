@@ -53,6 +53,7 @@ gem "sassc-rails"
 gem "kaminari"
 gem "kaminari-bootstrap"
 gem "ostruct"
+gem "aws-sdk-s3", require: false
 
 group :development, :test do
   gem "dotenv-rails"
