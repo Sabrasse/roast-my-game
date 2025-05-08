@@ -2,10 +2,11 @@ class S3TestController < ApplicationController
   def test_connection
     begin
       # Get the S3 client from Active Storage
-      s3_client = ActiveStorage::Blob.service.client
+      s3 = ActiveStorage::Blob.service.client
+      s3_client = s3.client # Get the actual client from the resource
       
       # Try to list objects in the bucket
-      response = s3_client.list_objects(bucket: ENV['AWS_BUCKET'], max_keys: 1)
+      response = s3_client.list_objects_v2(bucket: ENV['AWS_BUCKET'], max_keys: 1)
       
       # If we get here, the connection is working
       render json: {
@@ -15,7 +16,7 @@ class S3TestController < ApplicationController
         region: ENV['AWS_REGION'],
         access_key_id: ENV['AWS_ACCESS_KEY_ID'].present? ? 'Set' : 'Not Set',
         secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'].present? ? 'Set' : 'Not Set',
-        objects: response.contents.map { |obj| obj.key }
+        objects: response.contents&.map { |obj| obj.key } || []
       }
     rescue => e
       render json: {
