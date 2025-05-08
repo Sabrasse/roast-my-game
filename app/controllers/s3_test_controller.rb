@@ -32,8 +32,10 @@ class S3TestController < ApplicationController
 
   def test_upload
     begin
-      # Create a test content
-      content = Content.new(description: "Test upload #{Time.current}")
+      # Create a test content with a valid description
+      content = Content.new(
+        description: "This is a test upload to verify S3 functionality. Created at #{Time.current}."
+      )
       
       # Create a test file
       file = Tempfile.new(['test', '.txt'])
