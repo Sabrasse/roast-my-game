@@ -10,7 +10,7 @@ module ApplicationHelper
   def video_poster_url(content)
     return url_for(content.thumbnail) if content.thumbnail.attached?
 
-    # Dynamically extract the first frame of the video
-    "#{url_for(content.media)}#t=1"
+    # Try multiple timestamps (1s, 2s, 3s) and let JavaScript handle frame detection
+    "#{url_for(content.media)}#t=1,2,3"
   end
 end
