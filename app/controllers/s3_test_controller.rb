@@ -29,4 +29,47 @@ class S3TestController < ApplicationController
       }, status: :internal_server_error
     end
   end
+
+  def test_upload
+    begin
+      # Create a test content
+      content = Content.new(description: "Test upload #{Time.current}")
+      
+      # Create a test file
+      file = Tempfile.new(['test', '.txt'])
+      file.write("Test content #{Time.current}")
+      file.rewind
+      
+      # Attach the file
+      content.media.attach(
+        io: file,
+        filename: "test-#{Time.current.to_i}.txt",
+        content_type: 'text/plain'
+      )
+      
+      if content.save
+        render json: {
+          status: 'success',
+          message: 'Successfully uploaded test file',
+          content_id: content.id,
+          media_url: url_for(content.media)
+        }
+      else
+        render json: {
+          status: 'error',
+          message: 'Failed to save content',
+          errors: content.errors.full_messages
+        }, status: :unprocessable_entity
+      end
+    rescue => e
+      render json: {
+        status: 'error',
+        message: e.message,
+        backtrace: e.backtrace[0..5]
+      }, status: :internal_server_error
+    ensure
+      file&.close
+      file&.unlink
+    end
+  end
 end 
