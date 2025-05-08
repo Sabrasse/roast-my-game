@@ -17,8 +17,6 @@ amazon:
   upload:
     acl: private
     cache_control: "public, max-age=31536000"
-  # Disable ACLs since bucket has Object Ownership set to "Bucket owner enforced"
-  acl: private
   # Add these options to work with bucket owner enforced settings
   force_path_style: true
   public_read: true
