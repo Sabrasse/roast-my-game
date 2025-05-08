@@ -13,13 +13,6 @@ amazon:
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['AWS_REGION'] %>
   bucket: <%= ENV['AWS_BUCKET'] %>
-  public: true
-  upload:
-    acl: private
-    cache_control: "public, max-age=31536000"
-  # Add these options to work with bucket owner enforced settings
-  force_path_style: true
-  public_read: true
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
