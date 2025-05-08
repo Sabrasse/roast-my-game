@@ -4,9 +4,11 @@
       <% if content.media.blob.content_type.start_with?("image") %>
         <%= image_tag content.media, class: "content-media", loading: "lazy", alt: content.description %>
       <% elsif content.media.blob.content_type.start_with?("video") %>
-        <video class="content-media" loop muted>
-          <source src="<%= url_for(content.media) %>" type="<%= content.media.blob.content_type %>">
-        </video>
+        <div data-controller="video-poster">
+          <video class="content-media" loop muted poster="<%= video_poster_url(content) %>" data-video-poster-target="video">
+            <source src="<%= url_for(content.media) %>" type="<%= content.media.blob.content_type %>">
+          </video>
+        </div>
       <% end %>
     <% end %>
 
