@@ -12,6 +12,9 @@ class Content < ApplicationRecord
   # It's needed for the cache(["v1", content]) to work properly
   include ActionView::RecordIdentifier
 
+  # Generate thumbnails for both images and videos
+  after_create_commit :generate_thumbnail
+
   # This will update the cache when the media attachment changes
   has_one_attached :media do |attachable|
     attachable.variant :thumb, resize_to_limit: [300, 300]
@@ -28,7 +31,30 @@ class Content < ApplicationRecord
   scope :recent, -> { order(created_at: :desc) }
   scope :expiring_soon, -> { anonymous.where('created_at < ?', 7.days.ago) }
 
+  def thumbnail_url
+    return url_for(thumbnail) if thumbnail.attached?
+    return url_for(media.variant(:thumb)) if media.attached? && media.content_type.start_with?('image/')
+    return url_for(media.preview(resize_to_limit: [300, 300])) if media.attached? && media.content_type.start_with?('video/')
+    nil
+  end
+
   private
+
+  def generate_thumbnail
+    return unless media.attached?
+
+    if media.content_type.start_with?('image/')
+      # For images, create a thumbnail variant
+      thumbnail.attach(
+        media.variant(resize_to_limit: [300, 300]).processed
+      )
+    elsif media.content_type.start_with?('video/')
+      # For videos, create a preview frame
+      thumbnail.attach(
+        media.preview(resize_to_limit: [300, 300]).processed
+      )
+    end
+  end
 
   def acceptable_media
     return unless media.attached?

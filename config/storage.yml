@@ -13,6 +13,13 @@ amazon:
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   region: <%= ENV['AWS_REGION'] %>
   bucket: <%= ENV['AWS_BUCKET'] %>
+  upload:
+    cache_control: "public, max-age=31536000"
+  public: true
+  # Add default cache control for all objects
+  default_headers:
+    Cache-Control: "public, max-age=31536000"
+    Expires: <%= 1.year.from_now.httpdate %>
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

@@ -2,12 +2,10 @@
   <div class="content-card">
     <% if content.media.attached? %>
       <% if content.media.blob.content_type.start_with?("image") %>
-        <%= image_tag content.media, class: "content-media", loading: "lazy", alt: content.description %>
+        <%= image_tag content.thumbnail_url, class: "content-media", loading: "lazy", alt: content.description %>
       <% elsif content.media.blob.content_type.start_with?("video") %>
         <div data-controller="video-poster">
-          <video class="content-media" loop muted poster="<%= video_poster_url(content) %>" data-video-poster-target="video">
-            <source src="<%= url_for(content.media) %>" type="<%= content.media.blob.content_type %>">
-          </video>
+          <%= image_tag content.thumbnail_url, class: "content-media", loading: "lazy", alt: content.description %>
         </div>
       <% end %>
     <% end %>
