@@ -32,6 +32,11 @@ class Content < ApplicationRecord
   scope :expiring_soon, -> { anonymous.where('created_at < ?', 7.days.ago) }
 
   def thumbnail_url
+    Rails.logger.info "Content ##{id}: Generating thumbnail_url"
+    Rails.logger.info "Content ##{id}: thumbnail attached? #{thumbnail.attached?}"
+    Rails.logger.info "Content ##{id}: media attached? #{media.attached?}"
+    Rails.logger.info "Content ##{id}: media content type: #{media.content_type}" if media.attached?
+
     return url_for(thumbnail) if thumbnail.attached?
     return url_for(media.variant(:thumb)) if media.attached? && media.content_type.start_with?('image/')
     return url_for(media.preview(resize_to_limit: [300, 300])) if media.attached? && media.content_type.start_with?('video/')
@@ -41,18 +46,28 @@ class Content < ApplicationRecord
   private
 
   def generate_thumbnail
+    Rails.logger.info "Content ##{id}: Starting thumbnail generation"
     return unless media.attached?
 
-    if media.content_type.start_with?('image/')
-      # For images, create a thumbnail variant
-      thumbnail.attach(
-        media.variant(resize_to_limit: [300, 300]).processed
-      )
-    elsif media.content_type.start_with?('video/')
-      # For videos, create a preview frame
-      thumbnail.attach(
-        media.preview(resize_to_limit: [300, 300]).processed
-      )
+    Rails.logger.info "Content ##{id}: Media is attached, content type: #{media.content_type}"
+    
+    begin
+      if media.content_type.start_with?('image/')
+        Rails.logger.info "Content ##{id}: Generating image thumbnail"
+        thumbnail.attach(
+          media.variant(resize_to_limit: [300, 300]).processed
+        )
+        Rails.logger.info "Content ##{id}: Image thumbnail generated successfully"
+      elsif media.content_type.start_with?('video/')
+        Rails.logger.info "Content ##{id}: Generating video thumbnail"
+        preview = media.preview(resize_to_limit: [300, 300])
+        Rails.logger.info "Content ##{id}: Video preview generated, attaching thumbnail"
+        thumbnail.attach(preview.processed)
+        Rails.logger.info "Content ##{id}: Video thumbnail attached successfully"
+      end
+    rescue => e
+      Rails.logger.error "Content ##{id}: Error generating thumbnail: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
     end
   end
 
