@@ -38,10 +38,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :amazon
-  config.active_storage.resolve_model_to_route = :rails_storage_redirect
-  config.active_storage.routes_prefix = '/rails/active_storage'
-  config.active_storage.default_url_options = { host: 'www.gameroaster.com', protocol: 'https' }
+  config.active_storage.service = :local
+  config.active_storage.resolve_model_to_route = :rails_storage_proxy
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil

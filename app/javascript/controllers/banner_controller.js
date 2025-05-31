@@ -9,7 +9,10 @@ export default class extends Controller {
   connect() {
     console.log("Banner controller connected");
     this.initializeCounters()
-    this.initializeCodeTyping()
+    // Only initialize code typing if the target exists
+    if (this.hasCodeContentTarget) {
+      this.initializeCodeTyping()
+    }
   }
 
   initializeCounters() {
@@ -50,68 +53,57 @@ export default class extends Controller {
   }
 
   initializeCodeTyping() {
-    const codeElement = this.codeContentTarget
-    if (!codeElement) return
+    const sample = codeSamples[Math.floor(Math.random() * codeSamples.length)]
+    let currentIndex = 0
+    let currentLine = 0
+    let currentChar = 0
+    let isTyping = true
 
-    const code = codeSamples.gameExample
-    codeElement.textContent = ''
-    let index = 0
+    const typeNextChar = () => {
+      if (!isTyping) return
 
-    const typeCode = () => {
-      if (index < code.length) {
-        const char = code[index]
+      if (currentLine >= sample.length) {
+        isTyping = false
+        return
+      }
+
+      const line = sample[currentLine]
+      if (currentChar === 0) {
+        this.codeContentTarget.innerHTML += '<div class="line"></div>'
+      }
+
+      const currentLineElement = this.codeContentTarget.lastElementChild
+      const char = line[currentChar]
+      
+      if (char) {
         const span = document.createElement('span')
+        span.textContent = char
         
         // Apply syntax highlighting
-        if (char === '/' && code[index + 1] === '/') {
+        if (char === '/' && line[currentChar + 1] === '/') {
           span.className = 'comment'
-          span.textContent = code.slice(index, code.indexOf('\n', index) + 1)
-          index = code.indexOf('\n', index) + 1
-        } else if (char === '`') {
-          span.className = 'string'
-          const endIndex = code.indexOf('`', index + 1) + 1
-          span.textContent = code.slice(index, endIndex)
-          index = endIndex
         } else if (char === '"' || char === "'") {
           span.className = 'string'
-          const endIndex = code.indexOf(char, index + 1) + 1
-          span.textContent = code.slice(index, endIndex)
-          index = endIndex
-        } else if (/\d/.test(char)) {
+        } else if (/[0-9]/.test(char)) {
           span.className = 'number'
-          let endIndex = index + 1
-          while (/\d/.test(code[endIndex])) endIndex++
-          span.textContent = code.slice(index, endIndex)
-          index = endIndex
-        } else if (/\w/.test(char)) {
-          const word = code.slice(index).match(/\w+/)[0]
-          if (['const', 'return'].includes(word)) {
-            span.className = 'keyword'
-          } else if (['push', 'log'].includes(word)) {
-            span.className = 'function'
-          }
-          span.textContent = word
-          index += word.length
-        } else {
-          span.textContent = char
-          index++
+        } else if (['function', 'const', 'let', 'var', 'return', 'if', 'else'].includes(line.slice(currentChar).split(' ')[0])) {
+          span.className = 'keyword'
+        } else if (char === '(' && currentChar > 0) {
+          span.className = 'function'
         }
         
-        codeElement.appendChild(span)
-        setTimeout(typeCode, Math.random() * 30 + 20)
+        currentLineElement.appendChild(span)
       }
+
+      currentChar++
+      if (currentChar >= line.length) {
+        currentLine++
+        currentChar = 0
+      }
+
+      setTimeout(typeNextChar, Math.random() * 50 + 20)
     }
 
-    // Start typing when code window is in viewport
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          typeCode()
-          observer.unobserve(entry.target)
-        }
-      })
-    }, { threshold: 0.5 })
-
-    observer.observe(codeElement.parentElement)
+    typeNextChar()
   }
 } 
