@@ -18,64 +18,6 @@
       radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
     pointer-events: none;
   }
-
-  .code-window {
-    background: #1e1e1e;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-family: 'Fira Code', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-
-    .code-header {
-      background: #2d2d2d;
-      padding: 8px 16px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid #3d3d3d;
-
-      .code-buttons {
-        display: flex;
-        gap: 6px;
-        margin-right: 12px;
-
-        .code-button {
-          width: 12px;
-          height: 12px;
-          border-radius: 50%;
-
-          &.red { background: #ff5f56; }
-          &.yellow { background: #ffbd2e; }
-          &.green { background: #27c93f; }
-        }
-      }
-
-      .code-title {
-        color: #808080;
-        font-size: 12px;
-      }
-    }
-
-    .code-content {
-      flex: 1;
-      padding: 16px;
-      margin: 0;
-      overflow: auto;
-      color: #d4d4d4;
-      white-space: pre;
-      tab-size: 2;
-
-      .comment { color: #6a9955; }
-      .string { color: #ce9178; }
-      .number { color: #b5cea8; }
-      .keyword { color: #569cd6; }
-      .function { color: #dcdcaa; }
-    }
-  }
 }
 
 .banner-grid {

@@ -1,4 +1,5 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+console.log("Application.js loading...");
 
 // Import all required modules
 import "@hotwired/turbo-rails"
@@ -7,16 +8,13 @@ import "@popperjs/core"
 import "bootstrap"
 import "turbo_scroll"
 
+// Log successful imports
+console.log("All modules imported successfully");
+
 // Add a DOMContentLoaded listener to check if the page is properly loaded
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM fully loaded");
   // Check if dynamic elements are present
-  const latestGamesSection = document.querySelector(".latest-games-section")
-  const counterElements = document.querySelectorAll("[data-counter]")
-  
-  if (!latestGamesSection) {
-    console.warn("Latest games section not found")
-  }
-  if (counterElements.length === 0) {
-    console.warn("No counter elements found")
-  }
+  console.log("Latest games section:", document.querySelector(".latest-games-section"));
+  console.log("Counter elements:", document.querySelectorAll("[data-counter]"));
 });

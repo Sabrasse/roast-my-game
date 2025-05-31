@@ -1,60 +1,10 @@
-export const codeSamples = [
-  [
-    "// Game feedback analysis",
-    "function analyzeGameFeedback(game) {",
-    "  const feedback = game.getFeedback();",
-    "  const scores = feedback.map(f => f.score);",
-    "  const average = scores.reduce((a, b) => a + b) / scores.length;",
-    "  ",
-    "  return {",
-    "    averageScore: average.toFixed(1),",
-    "    totalReviews: scores.length,",
-    "    sentiment: average > 7 ? 'positive' : 'mixed'",
-    "  };",
-    "}"
-  ],
-  [
-    "// Player progress tracking",
-    "class PlayerProgress {",
-    "  constructor(playerId) {",
-    "    this.playerId = playerId;",
-    "    this.achievements = [];",
-    "    this.level = 1;",
-    "  }",
-    "  ",
-    "  unlockAchievement(achievement) {",
-    "    this.achievements.push(achievement);",
-    "    this.checkLevelUp();",
-    "  }",
-    "  ",
-    "  checkLevelUp() {",
-    "    if (this.achievements.length >= this.level * 5) {",
-    "      this.level++;",
-    "      return true;",
-    "    }",
-    "    return false;",
-    "  }",
-    "}"
-  ],
-  [
-    "// Game session management",
-    "const gameSession = {",
-    "  startTime: null,",
-    "  players: new Set(),",
-    "  ",
-    "  start() {",
-    "    this.startTime = Date.now();",
-    "    console.log('Game session started');",
-    "  },",
-    "  ",
-    "  addPlayer(player) {",
-    "    this.players.add(player);",
-    "    player.connect();",
-    "  },",
-    "  ",
-    "  getDuration() {",
-    "    return (Date.now() - this.startTime) / 1000;",
-    "  }",
-    "};"
-  ]
-]; 
+export const codeSamples = {
+  gameExample: `// Get expert feedback
+const game = {
+  name: "My Awesome Game",
+  feedback: "Your game rocks! 🎮",
+  level: 42
+}
+
+console.log("Level up! 🚀")`
+}; 
